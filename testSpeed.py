@@ -67,8 +67,8 @@ def updateImage():
             toMatrixPixels[x+64,y-16] = pixels[x,y]      
     for y in range(16):
             for x in range(32):
-                toMatrixPixels[x+32*0,y], toMatrixPixels[x+32*1,y] = toMatrixPixels[x+32*1,y], toMatrixPixels[x+32*0,y]
-                toMatrixPixels[x+32*3,y], toMatrixPixels[x+32*2,y] = toMatrixPixels[x+32*2,y], toMatrixPixels[x+32*3,y]
+                toMatrixPixels[x+32*0,y], toMatrixPixels[x+32*2,y] = toMatrixPixels[x+32*2,y], toMatrixPixels[x+32*0,y]
+                toMatrixPixels[x+32*3,y], toMatrixPixels[x+32*1,y] = toMatrixPixels[x+32*1,y], toMatrixPixels[x+32*3,y]
     matrix.SetImage(toMatrixBuffer, 0, 0)
 
 #myFont = ImageFont.truetype("Segment7Standard.otf", 36)
