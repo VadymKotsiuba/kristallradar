@@ -14,7 +14,7 @@ y_shift = 1
 serial_port = '/dev/ttyUSB0'
 serial_speed = 9600
 
-font_name = "/home/pi/scripts/radarfont.ttf"
+font_name = "/home/pi/kristallradarlite/radarfont.ttf"
 font_size = 30
 
 time_image_update = 2
@@ -133,13 +133,13 @@ updateImage()
 sec = 0
 zero_sec = 0
 
-dataFile = open("/home/pi/scripts/started.txt", "r")
+dataFile = open("/home/pi/kristallradarlite/started.txt", "r")
 countStart = int(dataFile.readline())
 dataFile.close()
 
 countStart+=1
 
-dataFile = open("/home/pi/scripts/started.txt", "w")
+dataFile = open("/home/pi/kristallradarlite/started.txt", "w")
 dataFile.write(str(countStart))
 dataFile.close()
 
@@ -151,4 +151,3 @@ while 1:
     if sec >= 5:
         updateImage()
         sec = 0
-

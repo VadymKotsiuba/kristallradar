@@ -10,7 +10,7 @@ digit_width = 18
 screen_width = 64;
 y_shift = -8
 
-font_name = "/home/pi/scripts/MachineBT.ttf"
+font_name = "/home/pi/kristallradarlite/MachineBT.ttf"
 #font_name = "/home/pi/scripts/radarfont.ttf"
 font_size = 40
 
@@ -20,6 +20,7 @@ myY = 0
 
 #variables
 logNoData = False
+speedValue = 0
 
 def setColor(color):#string
     global myColor
