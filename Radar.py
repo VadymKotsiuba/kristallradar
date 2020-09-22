@@ -1,12 +1,10 @@
 import serial
 import time
-from threading import Timer
-from tkinter import *
 from PIL import *
 from PIL import Image
-from PIL import ImageTk
 from PIL import ImageFont
 from PIL import ImageDraw
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 #constants
 digit_width = 18
@@ -41,17 +39,14 @@ def setPosition(x_pos,y_pos):
     myX = x_pos
     myY = y_pos
 
-def exitProgram(event):
-    COMport.close()
-    exit()
-
 def checkSpeed():
-    if 0<displayValue<=50:
-        setColor('green')
-    elif displayValue>50:
-        setColor('red')
+    if 0<speedValue<=50:
+        setColor('#00FF00')
+       #setColor('#00af00')
+    elif speedValue>50:
+        setColor('#FF0000')
     else:
-        setColor('black')
+        setColor('#000000')
     if 0<=displayValue<10:
        setPosition((screen_width - digit_width)/2-2, y_shift)
     elif 10<=displayValue<100:
@@ -60,19 +55,28 @@ def checkSpeed():
        setPosition(0, y_shift)
 
 def updateImage():
-    global myImg
+    global toMatrixBuffer
     toolDraw.rectangle([0,0,buffer.width-1,buffer.height-1], fill='black')
     toolDraw.text((myX,myY), str(displayValue), font=myFont, fill=myColor)
     pixels = buffer.load();
+    toMatrixPixels = toMatrixBuffer.load()
     for y in range(4):
         for x in range(64):
             pixels[x,y], pixels[x,y+4] = pixels[x,y+4], pixels[x,y]
             pixels[x,y+8], pixels[x,y+8+4] = pixels[x,y+8+4], pixels[x,y+8]
             pixels[x,y+16], pixels[x,y+16+4] = pixels[x,y+16+4], pixels[x,y+16]
             pixels[x,y+24], pixels[x,y+24+4] = pixels[x,y+24+4], pixels[x,y+24]
-    myImg = ImageTk.PhotoImage(buffer)
-    myLabel.config(image=myImg)
-    myLabel.image = myImg
+    for y in range(16):
+        for x in range(64):
+            toMatrixPixels[x,y] = pixels[x,y]
+    for y in range(16,32):
+        for x in range(64):
+            toMatrixPixels[x+64,y-16] = pixels[x,y]      
+    for y in range(16):
+            for x in range(32):
+                toMatrixPixels[x+32*0,y], toMatrixPixels[x+32*3,y] = toMatrixPixels[x+32*3,y], toMatrixPixels[x+32*0,y]
+                toMatrixPixels[x+32*1,y], toMatrixPixels[x+32*2,y] = toMatrixPixels[x+32*2,y], toMatrixPixels[x+32*1,y]
+    matrix.SetImage(toMatrixBuffer, 0, 0)
 
 def readData():
     global data
@@ -103,7 +107,6 @@ def readData():
         displayValue = speedValue
     if speedValue > 199:
         displayValue = 199
-    #comLabel.config(text = str(data[0])+' '+str(data[1])+' '+str(data[2])+' '+str(data[3]))
 
 def timeUpdate():
     global sec
@@ -118,25 +121,13 @@ COMport.close()
 COMport.open()
 COMport.reset_input_buffer()
 
-GUI = Tk()
-GUI.title('Radar v0.1.2')
-GUI.overrideredirect(True)
-GUI.resizable(False, False)
-GUI.geometry('64x32+500+400')
-GUI.configure(bg='black')
-GUI.bind('<Escape>', exitProgram)
-
 myFont = ImageFont.truetype(font_name, font_size)
 
 buffer = Image.new("RGB", (64,32), "black")
 toolDraw = ImageDraw.Draw(buffer)
 toolDraw.text((0,0), str(speedValue), font=myFont, fill='black')
 
-myImg = ImageTk.PhotoImage(buffer)
-
-myLabel = Label(GUI, image=myImg)
-myLabel.image = myImg
-myLabel.place(x = -1, y = -1)
+toMatrixBuffer = Image.new("RGB", (128,16), "black")
 
 updateImage()
 sec = 0
@@ -160,6 +151,4 @@ while 1:
     if sec >= 5:
         updateImage()
         sec = 0
-    GUI.update_idletasks()
-    GUI.update()
 
