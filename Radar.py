@@ -129,20 +129,6 @@ toolDraw.text((0,0), str(speedValue), font=myFont, fill='black')
 
 toMatrixBuffer = Image.new("RGB", (128,16), "black")
 
-updateImage()
-sec = 0
-zero_sec = 0
-
-dataFile = open("/home/pi/kristallradarlite/started.txt", "r")
-countStart = int(dataFile.readline())
-dataFile.close()
-
-countStart+=1
-
-dataFile = open("/home/pi/kristallradarlite/started.txt", "w")
-dataFile.write(str(countStart))
-dataFile.close()
-
 matrix_options = RGBMatrixOptions()
 matrix_options.rows = 16
 matrix_options.cols = 32
@@ -157,6 +143,20 @@ matrix_options.brightness = 100
 matrix_options.pwm_lsb_nanoseconds = 350
 matrix = RGBMatrix(options = matrix_options)
 matrix.SetImage(buffer, 0, 0)
+
+updateImage()
+sec = 0
+zero_sec = 0
+
+dataFile = open("/home/pi/kristallradarlite/started.txt", "r")
+countStart = int(dataFile.readline())
+dataFile.close()
+
+countStart+=1
+
+dataFile = open("/home/pi/kristallradarlite/started.txt", "w")
+dataFile.write(str(countStart))
+dataFile.close()
 
 while 1:
     COMport.reset_input_buffer()
