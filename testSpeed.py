@@ -81,13 +81,13 @@ toolDraw.text((0,0), str(speedValue), font=myFont, fill='black')
 toMatrixBuffer = Image.new("RGB", (128,16), "black")
 
 
-dataFile = open("/home/pi/scripts/started.txt", "r")
+dataFile = open("/home/pi/kristallradarlite/started.txt", "r")
 countStart = int(dataFile.readline())
 dataFile.close()
 
 countStart+=1
 
-dataFile = open("/home/pi/scripts/started.txt", "w")
+dataFile = open("/home/pi/kristallradarlite/started.txt", "w")
 dataFile.write(str(countStart))
 dataFile.close()
 
