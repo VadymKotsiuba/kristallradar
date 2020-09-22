@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=MatrixDriver
+Comment=
+Exec=sudo /home/pi/rpi-fb-matrix/rpi-fb-matrix --led-rows=16 --led-multiplexing=4 --led-pwm-lsb-nanoseconds=1000 --led-gpio-mapping=adafruit-hat-pwm --led-daemon /home/pi/rpi-fb-matrix/matrix.cfg

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Radar
+Comment=
+Exec=sudo python3 /home/pi/scripts/Radar.py
+Terminal=false
+Type=Application
