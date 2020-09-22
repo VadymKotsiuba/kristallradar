@@ -57,7 +57,7 @@ def checkSpeed():
 def updateImage():
     global toMatrixBuffer
     toolDraw.rectangle([0,0,buffer.width-1,buffer.height-1], fill='black')
-    toolDraw.text((myX,myY), str(displayValue), font=myFont, fill=myColor)
+    toolDraw.text((myX,myY), str(speedValue), font=myFont, fill=myColor)
     pixels = buffer.load();
     toMatrixPixels = toMatrixBuffer.load()
     for y in range(4):
@@ -74,8 +74,8 @@ def updateImage():
             toMatrixPixels[x+64,y-16] = pixels[x,y]      
     for y in range(16):
             for x in range(32):
-                toMatrixPixels[x+32*0,y], toMatrixPixels[x+32*3,y] = toMatrixPixels[x+32*3,y], toMatrixPixels[x+32*0,y]
-                toMatrixPixels[x+32*1,y], toMatrixPixels[x+32*2,y] = toMatrixPixels[x+32*2,y], toMatrixPixels[x+32*1,y]
+                toMatrixPixels[x+32*0,y], toMatrixPixels[x+32*1,y] = toMatrixPixels[x+32*1,y], toMatrixPixels[x+32*0,y]
+                toMatrixPixels[x+32*3,y], toMatrixPixels[x+32*2,y] = toMatrixPixels[x+32*2,y], toMatrixPixels[x+32*3,y]
     matrix.SetImage(toMatrixBuffer, 0, 0)
 
 def readData():
@@ -149,7 +149,7 @@ matrix_options.cols = 32
 matrix_options.chain_length = 4
 matrix_options.parallel = 1
 matrix_options.multiplexing = 4
-matrix_options.hardware_mapping = 'adafruit-hat-pwm'
+matrix_options.hardware_mapping = 'adafruit-hat'
 matrix_options.gpio_slowdown = 2
 matrix_options.pwm_bits = 1
 #matrix_options.pwm_dither_bits = 1
