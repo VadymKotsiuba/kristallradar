@@ -165,6 +165,6 @@ while 1:
     checkSpeed()
     if speedValue != 0 or displayValue != 0:
         print("Speed Value = {0}   Display Value = {1}".format(speedValue, displayValue))
-    if sec >= 5 and displayValue > 9 :
+    if sec >= 5:
         updateImage()
         sec = 0
