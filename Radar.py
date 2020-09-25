@@ -163,6 +163,7 @@ while 1:
     timeUpdate()
     readData()
     checkSpeed()
+    print("Speed Value = {0}   Display Value = {1}".format(speedValue, displayValue))
     if sec >= 5:
         updateImage()
         sec = 0
