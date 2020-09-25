@@ -142,7 +142,7 @@ matrix_options.pwm_bits = 1
 matrix_options.brightness = 100
 matrix_options.pwm_lsb_nanoseconds = 350
 matrix = RGBMatrix(options = matrix_options)
-matrix.SetImage(buffer, 0, 0)
+matrix.SetImage(toMatrixBuffer, 0, 0)
 
 updateImage()
 sec = 0
@@ -163,7 +163,8 @@ while 1:
     timeUpdate()
     readData()
     checkSpeed()
-    print("Speed Value = {0}   Display Value = {1}".format(speedValue, displayValue))
+    if speedValue <> 0 or displayValue <> 0:
+        print("Speed Value = {0}   Display Value = {1}".format(speedValue, displayValue))
     if sec >= 5:
         updateImage()
         sec = 0
