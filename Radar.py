@@ -40,7 +40,7 @@ def setPosition(x_pos,y_pos):
     myY = y_pos
 
 def checkSpeed():
-    if 10<=speedValue<=50:
+    if 0<speedValue<=50:
         setColor('#00FF00')
        #setColor('#00af00')
     elif speedValue>50:
@@ -58,7 +58,7 @@ def updateImage():
     global toMatrixBuffer
     toolDraw.rectangle([0,0,buffer.width-1,buffer.height-1], fill='black')
     toolDraw.text((myX,myY), str(displayValue), font=myFont, fill=myColor)
-    pixels = buffer.load();
+    pixels = buffer.load()
     toMatrixPixels = toMatrixBuffer.load()
     for y in range(4):
         for x in range(64):
