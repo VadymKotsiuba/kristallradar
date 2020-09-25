@@ -57,7 +57,7 @@ def checkSpeed():
 def updateImage():
     global toMatrixBuffer
     toolDraw.rectangle([0,0,buffer.width-1,buffer.height-1], fill='black')
-    toolDraw.text((myX,myY), str(speedValue), font=myFont, fill=myColor)
+    toolDraw.text((myX,myY), str(displayValue), font=myFont, fill=myColor)
     pixels = buffer.load();
     toMatrixPixels = toMatrixBuffer.load()
     for y in range(4):
