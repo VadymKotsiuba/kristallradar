@@ -40,7 +40,7 @@ def setPosition(x_pos,y_pos):
     myY = y_pos
 
 def checkSpeed():
-    if 0<speedValue<=50:
+    if 10<speedValue<=50:
         setColor('#00FF00')
        #setColor('#00af00')
     elif speedValue>50:
@@ -163,7 +163,7 @@ while 1:
     timeUpdate()
     readData()
     checkSpeed()
-    if speedValue <> 0 or displayValue <> 0:
+    if speedValue != 0 or displayValue != 0:
         print("Speed Value = {0}   Display Value = {1}".format(speedValue, displayValue))
     if sec >= 5:
         updateImage()
